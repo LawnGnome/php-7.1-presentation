@@ -1,0 +1,225 @@
+@import url(fonts.css);
+
+.reveal,
+.reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
+  color: black;
+}
+
+.reveal {
+  font-size: 48px;
+}
+
+.reveal .title {
+  font-size: 36px;
+}
+
+.reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
+  font-family: Amaranth, sans-serif;
+  font-weight: bold;
+  letter-spacing: 0;
+}
+
+.reveal h1.lowercase, .reveal h2.lowercase, .reveal h3.lowercase, .reveal h4.lowercase, .reveal h5.lowercase, .reveal h6.lowercase {
+  text-transform: none;
+}
+
+.reveal .title h1 {
+}
+
+.reveal a {
+  color: #1F4159;
+}
+
+.reveal small {
+  display: block;
+  font-size: 0.3em;
+  letter-spacing: 0;
+  vertical-align: baseline;
+}
+
+.horror {
+  color: #a00 !important;
+  font-family: Creepster, Amaranth, sans-serif !important;
+  letter-spacing: 0 !important;
+}
+
+.reveal strong {
+  color: #a00;
+  font-weight: bold;
+}
+
+.reveal code {
+  font-family: "Source Code Pro", monospace;
+  font-weight: 600;
+  text-transform: none !important;
+}
+
+.reveal pre code {
+  font-family: "Source Code Pro", monospace;
+  font-size: 1.25em;
+  font-weight: 600;
+  line-height: 1.4;
+  max-height: 10000em;
+  overflow: hidden;
+}
+
+.reveal code pre {
+  background: white;
+  font-family: "Source Code Pro", monospace;
+  font-size: 0.67em;
+  font-weight: 600;
+  line-height: 1.4;
+  overflow: hidden;
+  max-height: 10000em;
+}
+
+.reveal ul {
+  list-style: none;
+  margin-left: 0;
+}
+
+img {
+  border: 0 !important;
+}
+
+.reveal img.hide-border {
+  box-shadow: none;
+}
+
+.mega-octicon {
+  font-family: octicons !important;
+  font-size: 2em !important;
+  font-weight: normal !important;
+}
+
+.octicon {
+  font-family: octicons !important;
+  font-size: 2em !important;
+  font-weight: normal !important;
+}
+
+.diff-minus {
+  color: #700;
+}
+
+.wrap {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.reveal .image p {
+  font-size: 0.7em;
+  margin: 0.2em 0;
+}
+
+/* highlight.js colouring */
+.reveal pre code,
+.hljs {
+  background: white;
+  color: black;
+}
+
+.hljs-keyword,
+.hljs-tag,
+.hljs-request,
+.hljs-status {
+  color: #4f007f !important;
+}
+
+.hljs-comment {
+  color: #005f13 !important;
+}
+
+.hljs-number,
+.hljs-date {
+  color: #00135f !important;
+}
+
+.hljs-variable {
+  color: #5f1300 !important;
+}
+
+.hljs-string,
+.hljs-title {
+  color: #00237f !important;
+}
+
+/* Background styles. */
+
+/* Support a "translucent" background that puts the default gradient over the
+ * top. */
+.backgrounds div[data-background-hash^="translucent"].slide-background.present {
+  opacity: 0.85;
+  background: -moz-radial-gradient(center, circle cover, #f7fbfc 0%, #add9e4 100%);
+  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, #f7fbfc), color-stop(100%, #add9e4));
+  background: -webkit-radial-gradient(center, circle cover, #f7fbfc 0%, #add9e4 100%);
+  background: -o-radial-gradient(center, circle cover, #f7fbfc 0%, #add9e4 100%);
+  background: -ms-radial-gradient(center, circle cover, #f7fbfc 0%, #add9e4 100%);
+  background: radial-gradient(center, circle cover, #f7fbfc 0%, #add9e4 100%);
+  background-color: #f7fbfc;
+}
+
+/* Terminal handling. Max width is 60 characters. */
+.reveal code.terminal {
+  display: block;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  text-align: left;
+  background: #3f3f3f;
+  color: #dcdcdc;
+  font-size: 1.17em;
+}
+
+.reveal code.terminal .green {
+  color: LightGreen;
+}
+
+.reveal code.terminal .green-background {
+  background: LightGreen;
+  color: black;
+}
+
+.reveal code.terminal .red {
+  color: #f66;
+}
+
+.reveal code.terminal .red-background {
+  background: #f66;
+  color: black;
+}
+
+.reveal code.terminal .cursor:before {
+  content: "█";
+  animation: cursor 2s step-start infinite;
+}
+
+@keyframes cursor {
+  0% {
+    opacity: 1.0;
+  }
+
+  50% {
+    opacity: 0.0;
+  }
+}
+
+/* Slides with specific background images have their opacity crunched down. */
+.backgrounds .stack div[style*="background-image"].slide-background.present {
+  opacity: 0.15;
+}
+
+.backgrounds .stack div[style*="background-image"].slide-background.present:not([data-background-hash*="translucent"]) {
+  opacity: 1;
+}
+
+/* Slide specific styles. */
+
+.image-credits .licence:before {
+  content: " (";
+}
+
+.image-credits .licence:after {
+  content: ")";
+}
+
+/* vim: set nocin ai et ts=2 sw=2: */

@@ -1,0 +1,398 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>PHP 7.1</title>
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="css/fonts.css">
+		<link rel="stylesheet" href="reveal.js/css/reveal.css">
+		<link rel="stylesheet" href="css/sky.css" id="theme">
+
+    <!-- CSS overrides -->
+    <link rel="stylesheet" href="css/style.css">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="reveal.js/lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<div class="slides">
+				<section class="title">
+          <h1>PHP 7.1</h1>
+          <h3>
+            Adam Harvey
+            <br>
+            <a href="https://twitter.com/LGnome">@LGnome</a>
+            <br>
+            <a href="http://newrelic.com">New Relic</a>
+          </h3>
+          <aside class="notes">
+            Hi! My name is Adam, and it's time for another approximately annual
+            installment of "what new shiny things are in PHP"?
+          </aside>
+				</section>
+
+        <section>
+          <section id="wait" data-background="images/wait.jpg">
+            <aside class="notes">
+              So I can hear you all asking: "didn't we just leave this party?".
+              Indeed, only a few months ago, I was up here extolling the
+              virtues of PHP 7.0, and now PHP 7.1 is here?
+            </aside>
+          </section>
+
+          <section id="progress" data-background="images/progress.jpg">
+            <aside class="notes">
+              The reality, of course, is that progress marches on. PHP issues
+              minor releases on a theoretically annual schedule, and PHP 7.1 is
+              here. The good news is that it's nowhere near as big a release as
+              7.0, as the number would indicate, but there are a bunch of
+              interesting new features and BC things to know about.
+            </aside>
+          </section>
+        </section>
+
+        <section>
+          <section id="kitten" data-background="images/kitten.jpg">
+            <aside class="notes">
+              So what's new? I can't go through everything, but here are some
+              highlights.
+            </aside>
+          </section>
+
+          <section>
+            <h1>Types</h1>
+            <aside class="notes">
+              There are three main type changes.
+            </aside>
+          </section>
+
+          <section>
+            <h2>Nullable types</h2>
+						<pre><code class="php" data-trim>
+function my_function($foo): ?MyObject {
+  // this function may return either an instance of
+  // MyObject _or_ null
+
+  if ($this) {
+    return new MyObject;
+  }
+  return null;
+}
+						</code></pre>
+            <aside class="notes">
+              Maybe a code smell?
+            </aside>
+          </section>
+
+          <section>
+            <h2>Nullable types</h2>
+						<pre><code class="php" data-trim>
+declare(strict_types=1);
+function my_function(?string $foo) {
+  // ...
+}
+
+// equivalent to:
+function my_function($foo) {
+  if (!(is_string($foo) || is_null($foo))) {
+    throw new TypeError('...');
+  }
+  // ...
+}
+						</code></pre>
+            <aside class="notes">
+              Similarly, this works just as well as a parameter type
+              declaration.
+            </aside>
+          </section>
+
+          <section>
+            <h2>Void</h2>
+						<pre><code class="php" data-trim>
+function my_function(): void {
+  return;           // OK
+  return $value;    // fatal error!
+}
+						</code></pre>
+            <aside class="notes">
+              This one's pretty self-explanatory: void functions cannot return
+              a value of any type.
+            </aside>
+          </section>
+
+          <section>
+            <h2>Iterable</h2>
+						<pre><code class="php" data-trim>
+function my_function(iterable $foo) {
+  // ...
+}
+
+// equivalent to:
+function my_function($foo) {
+  if (!(is_array($foo) || $foo instanceof Traversable)) {
+    throw new TypeError('...');
+  }
+  // ...
+}
+						</code></pre>
+            <aside class="notes">
+            </aside>
+          </section>
+
+          <section>
+            <h1>General items</h1>
+            <aside class="notes">
+              This isn't complete, as I said, but is a general grab bag of
+              things I think are useful.
+            </aside>
+          </section>
+
+          <section>
+            <h2>Negative string offsets</h2>
+						<pre><code class="php" data-trim>
+$str = 'Vancouver';
+var_dump($str[-1]);       // outputs string(1) "r"
+						</code></pre>
+            <aside class="notes">
+              This is nicked from Python: using a negative offset to access a
+              character in a string now counts back from the end of the string.
+              Maybe someday we'll get the slicing syntax?
+            </aside>
+          </section>
+
+          <section>
+            <h2>Class constant visibility</h2>
+						<pre><code class="php" data-trim>
+class C {
+  public const FOO = 'foo';
+  protected const BAR = 'bar';
+  private const QUUX = 'quux';
+}
+						</code></pre>
+            <aside class="notes">
+              Fatal if you don't have permission.
+            </aside>
+          </section>
+
+          <section>
+            <h2>Multiple catch</h2>
+						<pre><code class="php" data-trim>
+try {
+  // ...
+} catch (FooException | BarException $e) {
+  // do the same thing for exceptions of different types
+}
+						</code></pre>
+            <aside class="notes">
+              Some people would say this is a code smell. They're not wrong,
+              but it's still fucking handy.
+            </aside>
+          </section>
+
+          <section>
+            <h2>Syslog</h2>
+						<pre><code class="ini" data-trim>
+error_log = syslog
+						</code></pre>
+            <aside class="notes">
+              This one's nifty: if you configure PHP to log errors to syslog,
+              it will now use appropriate syslog levels rather than logging
+              everything as "notice". Useful if you're feeding PHP errors into
+              another system!
+            </aside>
+          </section>
+        </section>
+
+        <section>
+          <section id="hammer" data-background="images/hammer.jpg">
+            <aside class="notes">
+              In each release, we remove some warts. PHP has a lot of warts. We
+              usually try to make them things that no sane person would do, but
+              technically these are backward incompatible changes, as much as
+              we try not to have them in minor releases.
+            </aside>
+          </section>
+
+          <section>
+            <h2>Missing arguments</h2>
+						<pre><code class="php" data-trim>
+function my_function($foo) {
+  // ...
+}
+
+// call without argument:
+my_function();            // throws an ArgumentCountError
+						</code></pre>
+            <aside class="notes">
+              This is almost certainly the biggest change in practice, and the
+              only one that I can see actually breaking real code. On the other
+              hand, if you relied on this you had bigger problems anyway.
+            </aside>
+          </section>
+
+          <section>
+            <h2>Void and Iterable</h2>
+						<pre><code class="php" data-trim>
+class Void {}             // fatal error
+class Iterable {}         // fatal error
+						</code></pre>
+            <aside class="notes">
+              The flip side of these lovely new pseudo types is that you can't
+              use them as class, interface or trait names any more. Sorry. Void
+              probably won't affect you unless you're writing a unit test
+              framework or implementing a DSL, but Iterable might be annoying.
+            </aside>
+          </section>
+
+          <section>
+            <h2>Randomness</h2>
+						<pre><code class="php" data-trim>
+mt_srand(1);
+var_dump(mt_rand());
+
+// on PHP 7.0: int(1244335972)
+// on PHP 7.1: int(895547922)
+						</code></pre>
+            <aside class="notes">
+              PHP has long has its own, buggy implementation of the Mersenne
+              Twister algorithm. In PHP 7.1, the real version is used, but this
+              means that if you rely on stable random numbers given a seed,
+              that's broken. There's a constant to get the old behaviour back
+              if you need it.
+            </aside>
+          </section>
+
+          <section>
+            <h2>Randomness</h2>
+						<pre><code class="php" data-trim>
+rand()  =&gt; mt_rand()
+srand() =&gt; mt_srand()
+						</code></pre>
+            <aside class="notes">
+              Additionally, because C library rand() functions suck (especially
+              on Windows), these are now aliased to the MT functions. Use
+              random_int() if you need something secure (but that was already
+              the case!).
+            </aside>
+          </section>
+        </section>
+
+        <section>
+          <section id="burned" data-background="images/burned.jpg">
+            <aside class="notes">
+              Finally, two things are deprecated, because they're horrifically
+              old and/or insecure.
+            </aside>
+          </section>
+
+          <section>
+            <h2>MCrypt</h2>
+            <aside class="notes">
+              The venerable mcrypt extension is deprecated, and will be removed
+              in a future version. There are numerous replacements available:
+              sodium is a good one, but none are drop in.
+            </aside>
+          </section>
+
+          <section>
+            <h2>mbstring ereg eval</h2>
+						<pre><code class="php" data-trim>
+$i = 0;
+mb_ereg_replace('foo.*bar', '$i++', $input, 'e');
+						</code></pre>
+            <aside class="notes">
+              That bit of nastiness would evaluate that string each time using
+              eval(), then use that as the replacement. For the love of $DEITY,
+              don't do that. Use preg_replace_callback() instead.
+            </aside>
+          </section>
+        </section>
+
+        <section data-background="images/when.jpg" id="when">
+          <aside class="notes">
+            The real question, of course, is when can you get this? At the
+            moment, we're at RC3, and there's almost certainly an RC4 coming
+            this week or not. (Git issues.) Basically, we keep releasing an RC
+            each fortnight until it's good enough. Hopefully by Christmas?
+          </aside>
+        </section>
+
+        <section>
+          <h2>Questions?</h2>
+          <a href="https://twitter.com/LGnome">@LGnome</a>
+          <h3 style="margin-top: 2em">Resources</h3>
+          <ul>
+            <li><a href="https://secure.php.net/migration71">PHP 7.1 migration guide</a></li>
+          </ul>
+        </section>
+
+        <section id="image-credits">
+          <h2>Image credits</h2>
+          <div></div>
+        </section>
+      </div>
+
+		</div>
+
+		<script src="reveal.js/lib/js/head.min.js"></script>
+		<script src="reveal.js/js/reveal.js"></script>
+
+		<script src="js/jquery-2.2.4.min.js"></script>
+		<script src="js/images.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: (-1 == window.location.host.indexOf("localhost") && -1 == window.location.host.indexOf("0.0.0.0")),
+				progress: false,
+				history: true,
+				center: true,
+        width: 1280,
+        height: 720,
+
+				transition: 'fade', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'reveal.js/plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'reveal.js/plugin/zoom-js/zoom.js', async: true },
+					{ src: 'reveal.js/plugin/notes/notes.js', async: true }
+				]
+			});
+
+			$("#image-credits > div").imageCredits();
+
+		</script>
+
+	</body>
+</html>
+<!-- vim: set nocin ai et ts=2 sw=2: -->

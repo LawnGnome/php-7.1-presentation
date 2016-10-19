@@ -1,0 +1,54 @@
+didn't 7.0 just come out?
+
+new features
+	types
+		nullable types: function foo(?string $foo): ?string
+		void return type: function foo(): void
+		iterable pseudo-type (array or Traversable)
+	OOP
+		class constant visibility
+		multi catch: catch (A | B $e)
+	general
+		negative string offsets
+	omit
+		Closure::fromCallable()
+		async signal handling
+		destructuring: [$a, $b] = $array
+		keys in destructuring: ['id' => $id, 'name' => $name] = $array
+
+incompatibilities
+	keep
+		passing too few parameters now results in ArgumentCountError
+		void and iterable no longer valid class/interface/trait names
+		mt_rand() output has changed (may optionally revert with a constant)
+		rand() and srand() now defined in terms of MT functions
+		error_log=syslog now gets errors logged at appropriate syslog levels
+		$this
+	omit
+		dynamic calls to internal functions that rely on scope have been disallowed (too confusing in terms of what the scope is)
+		numerical strings now support scientific notation
+		destructors on incomplete objects not called
+		call_user_func() always warns when the function expects references, but now also always succeeds
+		$str[] = 'x' doesn't silently convert to array, but throws an error instead
+		invalid octal numbers
+
+deprecations
+	mcrypt
+	/e modifier for mb_ereg_replace()
+
+performance?
+
+future
+	Argon2 available (but not default in 7.2)
+	arrow functions?
+	generics?
+	JIT (PHP 8?)
+	your feature here?
+
+when
+	soon!
+	very soon!
+
+resources
+
+questions

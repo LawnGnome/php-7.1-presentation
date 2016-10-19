@@ -1,0 +1,32 @@
+{
+  "wait": {
+    "licence": "CC-BY 2.0",
+    "source": "https://flic.kr/p/54E8g",
+    "author": "belgianchocolate",
+    "title": "YES"
+  },
+  "when": {
+    "licence": "CC-BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Steam_Clock_in_Vancouver_Gastown.jpg",
+    "author": "Ken Eckert",
+    "title": "Steam Clock"
+  },
+  "hammer": {
+    "licence": "CC-BY 2.0",
+    "source": "https://flic.kr/p/bNYXk4",
+    "author": "Ian Baker",
+    "title": "PHP Hammer"
+  },
+  "kitten": {
+    "licence": "CC-0",
+    "source": "https://pixabay.com/en/kitten-cute-feline-kitty-domestic-1246693/",
+    "author": "skeeze",
+    "title": "Kitten"
+  },
+  "progress": {
+    "licence": "CC-BY 2.0",
+    "source": "https://flic.kr/p/76tGGk",
+    "author": "Alexander Baxevanis",
+    "title": "Work in progress"
+  }
+}
