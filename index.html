@@ -57,6 +57,7 @@
 
         <section>
           <section id="wait" data-background="images/wait.jpg">
+            <h1></h1>
             <aside class="notes">
               So I can hear you all asking: "didn't we just leave this party?".
               Indeed, only a few months ago, I was up here extolling the
@@ -65,6 +66,7 @@
           </section>
 
           <section id="progress" data-background="images/progress.jpg">
+            <h1></h1>
             <aside class="notes">
               The reality, of course, is that progress marches on. PHP issues
               minor releases on a theoretically annual schedule, and PHP 7.1 is
@@ -77,6 +79,7 @@
 
         <section>
           <section id="kitten" data-background="images/kitten.jpg">
+            <h1></h1>
             <aside class="notes">
               So what's new? I can't go through everything, but here are some
               highlights.
@@ -229,6 +232,7 @@ error_log = syslog
 
         <section>
           <section id="hammer" data-background="images/hammer.jpg">
+            <h1></h1>
             <aside class="notes">
               In each release, we remove some warts. PHP has a lot of warts. We
               usually try to make them things that no sane person would do, but
@@ -303,6 +307,7 @@ srand() =&gt; mt_srand()
 
         <section>
           <section id="burned" data-background="images/burned.jpg">
+            <h1></h1>
             <aside class="notes">
               Finally, two things are deprecated, because they're horrifically
               old and/or insecure.
@@ -332,27 +337,30 @@ mb_ereg_replace('foo.*bar', '$i++', $input, 'e');
           </section>
         </section>
 
-        <section data-background="images/when.jpg" id="when">
-          <aside class="notes">
-            The real question, of course, is when can you get this? At the
-            moment, we're at RC3, and there's almost certainly an RC4 coming
-            this week or not. (Git issues.) Basically, we keep releasing an RC
-            each fortnight until it's good enough. Hopefully by Christmas?
-          </aside>
-        </section>
-
         <section>
-          <h2>Questions?</h2>
-          <a href="https://twitter.com/LGnome">@LGnome</a>
-          <h3 style="margin-top: 2em">Resources</h3>
-          <ul>
-            <li><a href="https://secure.php.net/migration71">PHP 7.1 migration guide</a></li>
-          </ul>
-        </section>
+          <section data-background="images/when.jpg" id="when">
+            <h1></h1>
+            <aside class="notes">
+              The real question, of course, is when can you get this? At the
+              moment, we're at RC3, and there's almost certainly an RC4 coming
+              this week or not. (Git issues.) Basically, we keep releasing an RC
+              each fortnight until it's good enough. Hopefully by Christmas?
+            </aside>
+          </section>
 
-        <section id="image-credits">
-          <h2>Image credits</h2>
-          <div></div>
+          <section>
+            <h2>Questions?</h2>
+            <a href="https://twitter.com/LGnome">@LGnome</a>
+            <h3 style="margin-top: 2em">Resources</h3>
+            <ul>
+              <li><a href="https://secure.php.net/migration71">PHP 7.1 migration guide</a></li>
+            </ul>
+          </section>
+
+          <section id="image-credits">
+            <h2>Image credits</h2>
+            <div id="image-credits-container"></div>
+          </section>
         </section>
       </div>
 
@@ -389,7 +397,7 @@ mb_ereg_replace('foo.*bar', '$i++', $input, 'e');
 				]
 			});
 
-			$("#image-credits > div").imageCredits();
+			$("#image-credits-container").imageCredits();
 
 		</script>
 
